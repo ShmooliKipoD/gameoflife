@@ -1,10 +1,11 @@
 import 'phaser';
+
 class PlayGame extends Phaser.Scene {
     image: Phaser.GameObjects.Image;
 
     graphics: Phaser.GameObjects.Graphics;
 
-    gameMetrix: number[][];;
+    gameMetrix: number[][];
     
     constructor() {
         super("PlayGame");
@@ -13,28 +14,42 @@ class PlayGame extends Phaser.Scene {
     preload(): void {
 
         this.gameMetrix = [
-            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0], // 0
-            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 1, 1, 1, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1], // 0
+            [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
         ];
     }
 
     create(): void {
 
         this.graphics = this.add.graphics({ fillStyle: { color: 0xf0fefe } });
+
+        this.time.addEvent({ delay: 200, loop: true, callback: () => {
+
+            this.updateGameMetrix();
+
+        }});
         
     }
 
     update(): void {
-
-        this.updateGameMetrix();
+        this.graphics.clear();
+        //this.updateGameMetrix();
         
         // console.log("update"  );
         for (let row = 0; row < this.gameMetrix.length; row++) {
@@ -51,15 +66,18 @@ class PlayGame extends Phaser.Scene {
     }
 
     updateGameMetrix() {
+        let result: number[][] = this.gameMetrix.map(row => [...row]);
+
         for (let row = 0; row < this.gameMetrix.length; row++) {
             for (let col = 0; col < this.gameMetrix[row].length; col++) {
                 if (this.gameMetrix[row][col] == 1) {
-                    this.gameMetrix[row][col] = this.shouldSurvives(row, col);
+                    result[row][col] = this.shouldSurvives(row, col);
                 } else {
-                    this.gameMetrix[row][col] = this.souldBorn(row, col);
+                    result[row][col] = this.souldBorn(row, col);
                 }
             }
         }
+        this.gameMetrix = result.map(row => [...row]);;
     }
     
     souldBorn(row: number, col: number): number {
@@ -86,7 +104,10 @@ class PlayGame extends Phaser.Scene {
         let liveNeighbours = 0;
         for (let r = row - 1; r <= row + 1; r++) {
             for (let c = col - 1; c <= col + 1; c++) {
-                if (r >= 0 && r < this.gameMetrix.length && c >= 0 && c < this.gameMetrix[r].length) {
+                if (r >= 0 &&
+                    r < this.gameMetrix.length &&
+                    c >= 0 &&
+                    c < this.gameMetrix[r].length) {
                     if (r != row || c != col) {
                         if (this.gameMetrix[r][c] == 1) {
                             liveNeighbours++;
@@ -95,6 +116,7 @@ class PlayGame extends Phaser.Scene {
                 }
             }
         }
+        console.log("row: " + row + " col: " + col + " liveNeighbours: " + liveNeighbours);
         return liveNeighbours;
     }
 }
