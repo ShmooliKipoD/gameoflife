@@ -10,7 +10,7 @@ export default class MainMenu extends Phaser.Scene {
 
     preload(): void {
         //TODO: need to load the assets
-        this.keys = this.input.keyboard.createCursorKeys();
+        //sthis.keys = this.input.keyboard.createCursorKeys();
     }
 
     create(): void {
