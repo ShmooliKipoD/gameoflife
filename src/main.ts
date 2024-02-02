@@ -12,7 +12,7 @@ class PlayGame extends Phaser.Scene {
     }
 
     preload(): void {
-
+        // lk
         this.gameMetrix = [
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1], // 0
             [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -38,6 +38,8 @@ class PlayGame extends Phaser.Scene {
     create(): void {
 
         this.graphics = this.add.graphics({ fillStyle: { color: 0xf0fefe } });
+
+        this.add.text(10, 10, "Game of Life", { font: "20px Verdana" }).setFill("#555555");
 
         this.time.addEvent({ delay: 200, loop: true, callback: () => {
 
