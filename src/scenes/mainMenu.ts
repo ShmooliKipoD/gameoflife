@@ -2,18 +2,21 @@ import 'phaser'
 
 export default class MainMenu extends Phaser.Scene {
     
+    private keys!: Phaser.Types.Input.Keyboard.CursorKeys;
+
     constructor() {
         super('MainMenu')
     }
 
     preload(): void {
         //TODO: need to load the assets
+        this.keys = this.input.keyboard.createCursorKeys();
     }
 
     create(): void {
         // TODO: need to create the main menu
 
-        
+
     }
 
     update(): void {
