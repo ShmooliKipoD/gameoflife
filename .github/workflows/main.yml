@@ -34,7 +34,7 @@ jobs:
         uses: actions/deploy-pages@v4.0.3
         with:
           # GitHub token
-          token: secrets.GHP_TOKEN # default is ${{ github.token }}
+          token: ${{ secrets.GHP_TOKEN }} # default is ${{ github.token }}
           # Time in milliseconds after which to timeout and cancel the deployment (default: 10 minutes)
           timeout: 600000 # optional, default is 600000
           # Maximum number of status report errors before cancelling a deployment (default: 10)
