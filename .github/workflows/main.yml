@@ -25,7 +25,7 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        ACCESS_TOKEN: ${{ secrets.GHP_TOKEN }}
-        BRANCH: gameoflife # The branch the action should deploy to.
+        #ACCESS_TOKEN: ${{ secrets.GHP_TOKEN }}
+        #BRANCH: gameoflife # The branch the action should deploy to.
         FOLDER: dist # The folder the action should deploy.
 
