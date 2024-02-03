@@ -27,6 +27,10 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
 
+    - name: log
+      run: |
+        ls -l
+
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
