@@ -1,17 +1,23 @@
 import 'phaser';
+import MainMenu from './scenes/mainMenu';
+
 
 class PlayGame extends Phaser.Scene {
     image: Phaser.GameObjects.Image;
 
     graphics: Phaser.GameObjects.Graphics;
 
+    menu: MainMenu;
+
     gameMetrix: number[][];
     
     constructor() {
         super("PlayGame");
+        this.menu = new MainMenu(this, "Game of Life");
     }
 
     preload(): void {
+        this.menu.preload();
         // lk
         this.gameMetrix = [
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1], // 0
@@ -38,8 +44,8 @@ class PlayGame extends Phaser.Scene {
     create(): void {
 
         this.graphics = this.add.graphics({ fillStyle: { color: 0xf0fefe } });
-
-        this.add.text(10, 10, "Game of Life", { font: "20px Verdana" }).setFill("#555555");
+        this.menu.create();
+        //this.add.text(10, 10, "Game of Life", { font: "48px Verdana" }).setFill("#555555");
 
         this.time.addEvent({ delay: 200, loop: true, callback: () => {
 
@@ -118,7 +124,7 @@ class PlayGame extends Phaser.Scene {
                 }
             }
         }
-        console.log("row: " + row + " col: " + col + " liveNeighbours: " + liveNeighbours);
+        // console.log("row: " + row + " col: " + col + " liveNeighbours: " + liveNeighbours);
         return liveNeighbours;
     }
 }
