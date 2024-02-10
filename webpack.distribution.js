@@ -33,6 +33,10 @@ module.exports = {
                     // every file inside src/assets folder
                     from: 'assets/*',
                     context: 'src/'
+                },
+                {
+                  test: /\.css$/,
+                  use: ['style-loader', 'css-loader']
                 }
             ]
         })
