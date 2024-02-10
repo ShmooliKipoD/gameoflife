@@ -29,11 +29,11 @@ module.exports = {
                     from: 'index.html',
                     context: 'src/'
                 },
-                // {
-                //     // every file inside src/assets folder
-                //     from: 'assets/*',
-                //     context: 'src/'
-                // }
+                {
+                    // every file inside src/assets folder
+                    from: 'assets/*',
+                    context: 'src/'
+                }
             ]
         })
     ],
@@ -48,6 +48,11 @@ module.exports = {
             test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/
-        }]
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        }
+        ]
     }
 }

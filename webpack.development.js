@@ -1,4 +1,7 @@
 const path = require('path');
+const { plugins } = require('./webpack.distribution');
+const CopyPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
     entry: {
@@ -30,6 +33,32 @@ module.exports = {
             test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/
-        }]
-    }
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        }
+        ]
+    },
+    plugins: [new CopyPlugin({
+        patterns: [
+            {
+                // src/index.html
+                from: 'index.html',
+                context: 'src/'
+            },
+            {
+                // every file inside src/assets folder
+                from: 'assets/**/*',
+                context: 'src/',
+                to: 'out/assets/'
+            },
+            {
+                // every file inside src/assets folder
+                from: 'assets/**/*',
+                context: 'src/',
+            }
+        ]
+    })
+    ],
 };
