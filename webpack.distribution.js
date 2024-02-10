@@ -33,10 +33,6 @@ module.exports = {
                     // every file inside src/assets folder
                     from: 'assets/*',
                     context: 'src/'
-                },
-                {
-                  test: /\.css$/,
-                  use: ['style-loader', 'css-loader']
                 }
             ]
         })
@@ -52,6 +48,11 @@ module.exports = {
             test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/
-        }]
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        }
+        ]
     }
 }
