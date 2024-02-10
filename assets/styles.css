@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Command";
+    src: 
+       url("fonts/EnterCommand.ttf") format("truetype"), ;
+   font-weight: bold;
+   font-style: normal;
+ }
+
+ @font-face {
+  font-family: "Command-Bold";
+  src: 
+     url("fonts/EnterCommand-Bold.ttf") format("truetype"), ;
+ font-weight: bold;
+ font-style: normal;
+}
