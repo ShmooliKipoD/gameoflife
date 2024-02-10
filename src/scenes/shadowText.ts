@@ -1,14 +1,14 @@
 import '../assets/styles.css'
+import GameObject from '../abstracts/GameObject';
 
-export default class ShadowText {
-
+export default class ShadowText extends GameObject {
+    
     private scene: Phaser.Scene;
 
     private textStr: string;
     private text: Phaser.GameObjects.Text;
     private shadow: Phaser.GameObjects.Text;
 
-    private position: Phaser.Geom.Point;
     private fontSize: number;
 
     constructor(
@@ -16,10 +16,9 @@ export default class ShadowText {
         position: Phaser.Geom.Point,
         text: string,
         fontSize: number) {
-        
+        super(position);
         this.textStr = text;
         this.scene = scene;
-        this.position = position;
         this.fontSize = fontSize;
     }
 
@@ -52,11 +51,25 @@ export default class ShadowText {
         
     }
 
-    public getHeigth(): number {
-        return this.text.height;
-    }
+    public get Heigth(): number {
 
-    public getWidth(): number {
+        let textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
+            fontFamily: "Command",
+            fontSize: this.fontSize,
+            color: "#ffffff"
+        };
+
+        let h = this.scene.make.text({
+            x: this.position.x,
+            y: this.position.y,
+            text: "",
+            style: textStyle,
+        }).height;
+
+        return this.text?.height ?? h;
+    }
+    
+    public get Width(): number {
         return this.text.width;
     }
 }

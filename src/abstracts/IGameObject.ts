@@ -5,7 +5,11 @@ export default interface IGameObject {
 
     setPosition(point: Phaser.Geom.Point): void;
 
-    // create(): void;
+    get Heigth(): number;
+
+    get Width(): number;
+
+    create(): void;
     // update(): void;
-    // preload(): void;
+    preload(): void;
 }

@@ -1,15 +1,23 @@
 import IGameObject from "./IGameObject";
 
-
-export default class GameObject implements IGameObject {
-    private position: Phaser.Geom.Point;
+export default abstract class GameObject implements IGameObject {
+    private _position: Phaser.Geom.Point;
 
     constructor(position: Phaser.Geom.Point = new Phaser.Geom.Point(0, 0)) {
-        this.position = position;
+        this._position = position;
     }
+    abstract create(): void;
+    abstract preload(): void;
+    
+    abstract get Heigth(): number;
+    abstract get Width(): number;
+
+    get position(): Phaser.Geom.Point {
+        return this._position;
+    } 
 
     public setPosition(point: Phaser.Geom.Point): void
     {
-        this.position = point;
+        this._position = point;
     }
 }
